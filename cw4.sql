@@ -1,0 +1,201 @@
+-- Database: Firma
+
+-- DROP DATABASE IF EXISTS "Firma";
+
+--Create SCHEMA ksiegowosc;
+--Create Table ksiegowosc.pracownicy(
+--id_pracownika INT PRIMARY KEY,
+--imie VARCHAR(30),
+--nazwisko VARCHAR(30),
+--adres VARCHAR(30),
+--telefon VARCHAR(15) 
+--);
+
+--INSERT INTO ksiegowosc.pracownicy (id_pracownika, imie, nazwisko, adres, telefon)
+--VALUES
+ --   (1, 'John', 'Doe', '123 Main St', '555123567'),
+  --  (2, 'Jane', 'Smith', '456 Elm St', '555987543'),
+  --  (3, 'Alice', 'Johnson', '789 Oak St', '555567890'),
+  --  (4, 'Bob', 'Wilson', '101 Pine St', '55791234'),
+  --  (5, 'Eve', 'Brown', '555 Cedar St', '555234678'),
+   -- (6, 'David', 'Lee', '777 Birch St', '555876532'),
+   -- (7, 'Sophia', 'Anderson', '888 Maple St', '555342789'),
+   -- (8, 'Oliver', 'Garcia', '999 Spruce St', '555654320'),
+   -- (9, 'Mia', 'Martinez', '222 Palm St', '555432198'),
+   -- (10, 'William', 'Taylor', '333 Oak St', '555210987');
+--CREATE TABLE ksiegowosc.godziny(
+--id_godziny INT PRIMARY KEY,
+--data DATE,
+--liczba_godzin INT,
+--id_pracownika INT,
+--FOREIGN KEY (id_pracownika) REFERENCES ksiegowosc.pracownicy(id_pracownika)
+--);
+--INSERT INTO ksiegowosc.godziny (id_godziny,data,liczba_godzin,id_pracownika)
+--VALUES
+ --   (1, '2023-11-08', 48, 1),
+  --  (2, '2023-11-08', 37, 2),
+   -- (3, '2023-11-09', 56, 1),
+    --(4, '2023-11-09', 17, 3),
+  --  (5, '2023-11-10', 28, 2),
+  --  (6, '2023-11-10', 27, 1),
+  --  (7, '2023-11-11', 26, 3),
+  --  (8, '2023-11-11', 38, 2),
+  --  (9, '2023-11-12', 47, 1),
+  --  (10, '2023-11-12', 36, 3);
+--CREATE TABLE ksiegowosc.pensje
+--(id_pensji INT PRIMARY KEY,
+-- stanowisko VARCHAR(30),
+-- kwota INT
+--);
+--INSERT INTO ksiegowosc.pensje(id_pensji,stanowisko,kwota)
+--VALUES
+--    (1, 'Manager', 60000),
+--    (2, 'Software Engineer', 50000),
+--    (3, 'Sales Representative', 45000),
+--    (4, 'Accountant', 55000),
+--    (5, 'Marketing Specialist', 48000),
+--    (6, 'HR Manager', 52000),
+--    (7, 'Customer Support', 42000),
+--    (8, 'Data Analyst', 48000),
+ --   (9, 'Product Manager', 62000),
+ --   (10, 'Quality Assurance', 48000);
+--CREATE TABLE ksiegowosc.premie(
+--id_premii INT PRIMARY KEY,
+--rodzaj VARCHAR(30),
+--kwota INT 
+--);
+-- INTO ksiegowosc.premie(id_premii,rodzaj, kwota)
+--VALUES
+--    (1, 'Zysk roczny', 5000),
+--    (2, 'Wydajność', 3000),
+--    (3, 'Przyznanie specjalne', 1000),
+--    (4, 'Wyniki projektu', 2000),
+--    (5, 'Zaangażowanie', 1500),
+--    (6, 'Innowacje', 2500),
+--    (7, 'Klient w roku', 4000),
+--    (8, 'Efektywność', 3500),
+--    (9, 'Najlepszy nowy projekt', 3000),
+--    (10, 'Wzrost przychodów', 4500);
+--CREATE TABLE ksiegowosc.wynagordzenie(
+--id_wynagrodzenia INT PRIMARY KEY,
+--data DATE,
+--id_pracownika INT,
+--id_godziny INT,
+--id_pensji INT,
+--id_premii INT,
+--FOREIGN KEY(id_pracownika) REFERENCES ksiegowosc.pracownicy(id_pracownika),
+--FOREIGN KEY(id_godziny) REFERENCES ksiegowosc.godziny(id_godziny),
+--FOREIGN KEY(id_pensji) REFERENCES ksiegowosc.pensje(id_pensji),
+--FOREIGN KEY(id_premii) REFERENCES ksiegowosc.premie(id_premii)
+--);
+--ALTER TABLE ksiegowosc.wynagordzenie RENAME TO wynagrodzenie;
+--Select* from ksiegowosc.wynagrodzenie;
+--INSERT INTO ksiegowosc.wynagrodzenie(id_wynagrodzenia, data, id_pracownika,
+--									 id_godziny,id_pensji,id_premii)
+--VALUES
+--  (1,'2023-01-01', 3, 8, 2, 5),
+--  (2,'2023-01-02', 7, 5, 1, 9),
+--  (3,'2023-01-03', 5, 3, 4, 10),
+--  (4,'2023-01-04', 2, 1, 7, 4),
+--  (5,'2023-01-05', 10, 6, 8, 2),
+--  (6,'2023-01-06', 1, 9, 3, 6),
+--  (7,'2023-01-07', 4, 2, 6, 1),
+--  (8,'2023-01-08', 9, 10, 5, 8),
+--  (9,'2023-01-09', 8, 4, 9, 3),
+--  (10,'2023-01-10', 6, 7, 10, 7);
+--SELECT*from ksiegowosc.wynagrodzenie;
+--SELECT id_pracownika,nazwisko
+--FROM ksiegowosc.pracownicy; A
+--B
+--SELECT DISTINCT w.id_pracownika
+--FROM ksiegowosc.wynagrodzenie w
+--JOIN ksiegowosc.pensje p ON w.id_pensji=p.id_pensji
+--WHERE p.kwota > 1000
+--C
+--SELECT DISTINCT w.id_pracownika
+--FROM ksiegowosc.wynagrodzenie w
+--LEFT JOIN ksiegowosc.premie pr ON w.id_premii=pr.id_premii
+--JOIN ksiegowosc.pensje pe ON w.id_pensji=pe.id_pensji
+--WHERE pr.id_premii = 0 AND pe.kwota>2000;
+--D
+--SELECT *
+--FROM ksiegowosc.pracownicy
+--WHERE UPPER(SUBSTRING(imie,1,1))='J';
+-- tworzymy wielkie litery i dodatkowy string do porownania
+--E
+--SELECT*
+--From ksiegowosc.pracownicy
+--Where UPPER(SUBSTRING(nazwisko,1,1))='N' AND UPPER(SUBSTRING(imie,LENGTH(imie),1))='A';
+--F
+--SELECT DISTINCT pr.imie, pr.nazwisko
+--FROM ksiegowosc.pracownicy pr
+--JOIN ksiegowosc.wynagrodzenie w ON w.id_pracownika=pr.id_pracownika
+--JOIN ksiegowosc.godziny g ON w.id_godziny=g.id_godziny
+--WHERE g.liczba_godzin*4>160;
+--G
+--SELECT DISTINCT pr.imie,pr.nazwisko
+--FROM ksiegowosc.pracownicy pr
+--JOIN ksiegowosc.wynagrodzenie w ON pr.id_pracownika=w.id_pracownika
+--JOIN ksiegowosc.pensje pe ON w.id_pensji=pe.id_pensji
+--WHERE pe.kwota>1500 AND pe.kwota<3000
+--H
+--SELECT DISTINCT pr.imie,pr.nazwisko
+--FROM ksiegowosc.pracownicy pr
+--JOIN ksiegowosc.wynagrodzenie w ON pr.id_pracownika=w.id_pracownika
+--JOIN ksiegowosc.godziny god ON god.id_godziny=w.id_godziny
+--WHERE god.liczba_godzin*4>160 AND w.id_premii=0;
+--I
+--SELECT pr.id_pracownika,pr.imie,pr.nazwisko,pe.kwota AS pensja
+--FROM ksiegowosc.pracownicy pr
+--JOIN ksiegowosc.wynagrodzenie w ON pr.id_pracownika=w.id_pracownika
+--JOIN ksiegowosc.pensje pe ON w.id_pensji=pe.id_pensji
+--ORDER BY pe.kwota DESC;
+--J
+--SELECT pr.id_pracownika,pr.imie,pr.nazwisko,pe.kwota,pm.kwota AS premia
+--FROM ksiegowosc.pracownicy pr
+--JOIN ksiegowosc.wynagrodzenie w ON pr.id_pracownika=w.id_pracownika
+--JOIN ksiegowosc.pensje pe ON pe.id_pensji=w.id_pensji
+--JOIN ksiegowosc.premie pm ON pm.id_premii=w.id_premii
+--ORDER BY pe.kwota+pm.kwota DESC;
+--K
+--SELECT pe.stanowisko, COUNT(*) AS liczba_pracownikow
+--FROM ksiegowosc.pracownicy pr
+--JOIN ksiegowosc.wynagrodzenie w ON pr.id_pracownika=w.id_pracownika
+--JOIN ksiegowosc.pensje pe ON pe.id_pensji=w.id_pensji
+--GROUP BY pe.stanowisko
+--ORDER BY liczba_pracownikow;
+--L
+--SELECT pe.stanowisko,
+--AVG(pe.kwota) AS srednia_placa,
+--MIN(pe.kwota) AS minimalna_placa,
+--MAX(pe.kwota) AS maksymalna_placa
+--FROM ksiegowosc.pensje pe
+--GROUP BY stanowisko;
+--M
+--SELECT SUM(pe.kwota + COALESCE(pm.kwota,0)) AS suma_wynagrodzen
+--FROM ksiegowosc.wynagrodzenie w
+--JOIN ksiegowosc.pensje pe ON pe.id_pensji=w.id_pensji
+--JOIN ksiegowosc.premie pm ON pm.id_premii=w.id_premii;
+--N
+--SELECT pe.stanowisko, 
+--SUM(pe.kwota + COALESCE(pm.kwota,0)) AS suma_wynagrodzen
+--FROM ksiegowosc.wynagrodzenie w
+--JOIN ksiegowosc.pensje pe ON pe.id_pensji=w.id_pensji
+--JOIN ksiegowosc.premie pm ON pm.id_premii=w.id_premii
+--GROUP BY pe.stanowisko;
+--O
+--SELECT pe.stanowisko, COUNT(w.id_premii) AS liczba_premii
+--FROM ksiegowosc.wynagrodzenie w
+--JOIN ksiegowosc.premie pm ON w.id_premii=pm.id_premii
+--JOIN ksiegowosc.pensje pe ON pe.id_pensji=w.id_pensji
+--GROUP BY pe.stanowisko;
+--DELETE FROM ksiegowosc.pracownicy pr
+--WHERE id_pracownika IN(
+--SELECT pr.id_pracownika
+--	FROM ksiegowosc.pracownicy pr
+--	JOIN ksiegowosc.wynagrodzenie w ON w.id_pracownika=pr.id_pracownika
+--	JOIN ksiegowosc.godziny god ON god.id_godziny=w.id_godziny
+--	JOIN ksiegowosc.pensje pe ON pe.id_pensji=w.id_pensji
+--	JOIN ksiegowosc.premie pm ON pm.id_premii=w.id_premii
+--	WHERE pe.kwota < 1200*12
+--);

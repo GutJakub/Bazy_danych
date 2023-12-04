@@ -1,0 +1,62 @@
+-- SCHEMA: ksiegowosc
+
+-- DROP SCHEMA IF EXISTS ksiegowosc ;
+
+--CREATE SCHEMA IF NOT EXISTS ksiegowosc
+ --   AUTHORIZATION postgres;
+--A
+--UPDATE ksiegowosc.pracownicy
+--SET telefon = CONCAT('+48',telefon);
+--SELECT*from ksiegowosc.pracownicy;
+--ALTER TABLE ksiegowosc.pracownicy
+--ALTER COLUMN telefon TYPE VARCHAR(20);
+--B
+--UPDATE ksiegowosc.pracownicy
+--SET telefon = CONCAT(
+ --   SUBSTRING(telefon FROM 1 FOR 3),
+  --  '-',
+  --  SUBSTRING(telefon FROM 4 FOR 3),
+  --  '-',
+  --  SUBSTRING(telefon FROM 7 FOR 3),
+--	'-',
+--	SUBSTRING(telefon FROM 10)
+--);
+--C
+--SELECT UPPER(pr.nazwisko) as najd_naz
+--FROM ksiegowosc.pracownicy pr
+--ORDER BY LENGTH(pr.nazwisko) DESC
+--LIMIT 1;
+--D  ZMIENIAMY kwote na string dzieki CAST oraz MD5 to szyfr od stringa
+--SELECT pr.imie,pr.nazwisko,MD5(CAST(pe.kwota AS VARCHAR)) AS szyfr_pensja 
+--FROM ksiegowosc.pracownicy pr
+--JOIN ksiegowosc.wynagrodzenie w ON w.id_pracownika=pr.id_pracownika
+--JOIN ksiegowosc.pensje pe ON pe.id_pensji=w.id_pensji;
+--E
+--SELECT pr.imie,pr.nazwisko,COALESCE(pe.kwota,0)+COALESCE(pm.kwota,0) AS wynagrodzenie
+--FROM ksiegowosc.pracownicy pr
+--JOIN ksiegowosc.wynagrodzenie w ON w.id_pracownika=pr.id_pracownika
+--JOIN ksiegowosc.pensje pe ON pe.id_pensji=w.id_pensji
+--LEFT JOIN ksiegowosc.premie pm ON pm.id_premii=w.id_premii;
+--G
+--SELECT*from ksiegowosc.godziny;
+--SELECT CONCAT(
+--'Pracownik ', pr.imie,' ',pr.nazwisko,', w dniu ', 
+--god.data,' otrzymal pensje calkowita na kwote ',
+-- COALESCE( (pe.kwota/12 ),0)+ COALESCE(pm.kwota,0) 
+-- + CASE 
+-- WHEN (god.liczba_godzin*4)>160
+--THEN COALESCE( ( (god.liczba_godzin*4-160) * 80),0)
+--ELSE 0 
+--END,
+ --' zl, gdzie wynagrodzenie zasadnicze wynosilo: ',
+-- pe.kwota/12,' zl, premia: ',pm.kwota,' zl, nadgodziny: ',
+-- CASE WHEN (god.liczba_godzin*4>160)
+--THEN COALESCE( ( (god.liczba_godzin*4-160) * 80),0)
+-- ELSE 0 
+-- END,' zl.'
+--) AS raport
+--FROM ksiegowosc.pracownicy pr
+--JOIN ksiegowosc.wynagrodzenie w ON w.id_pracownika=pr.id_pracownika
+--JOIN ksiegowosc.pensje pe ON pe.id_pensji=w.id_pensji
+--LEFT JOIN ksiegowosc.premie pm ON pm.id_premii=w.id_premii
+--LEFT JOIN ksiegowosc.godziny god ON god.id_godziny=w.id_godziny
