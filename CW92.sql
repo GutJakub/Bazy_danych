@@ -1,0 +1,26 @@
+--USE AdventureWorksLT2022
+--GO
+--CREATE TABLE Przychody(
+--CompanyContact VARCHAR(100),
+--Revenue INT
+--);
+--WITH PrzychodyCTE AS
+--(
+--Select
+--CONCAT( c.CompanyName, '(',c.FirstName, ' ',c.LastName,')')AS CompanyContact,
+--c.CustomerID,
+--soh.SalesOrderID,
+--SUM( sod.LineTotal ) AS TotalRevenue
+--FROM
+--SalesLT.Customer c
+--INNER JOIN SalesLT.SalesOrderHeader soh ON soh.CustomerID=c.CustomerID
+--INNER JOIN SalesLT.SalesOrderDetail sod ON sod.SalesOrderID=soh.SalesOrderID
+--GROUP BY c.CompanyName,c.FirstName,c.LastName,c.CustomerID,soh.SalesOrderID
+--)
+--INSERT INTO Przychody (CompanyContact, Revenue)
+--SELECT
+--    CompanyContact,
+--    TotalRevenue
+--FROM
+--    PrzychodyCTE;
+--SELECT*FROM Przychody;
