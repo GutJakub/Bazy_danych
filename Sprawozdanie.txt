@@ -1,0 +1,4 @@
+Porównanie wyszukiwanie w tabelli z użyciem indexów.
+Wyszukiwanie początkowe, które zawierało indexy było o 0.034s szybsze co w skali na tak małych jednostkach jest znaczącą różnicą, blisko 334 krotnie razy więcej czasu zajęło znalezienie tych danych bez indexów. Kolejną wadą wyszukiwania bez indexów było zużycie procesora też na tych minimalnych zapytaniach, zużyło znacznie więcej co przy większych ilościach danych i zapytań może odbijać się na wydajności całej bazy danych i jej modelu. Zmienił się również typ logiczny i fizyczny całej operacji z Clustered Index Scanu dla posiadającej PK_SalesOrderDetail_SalesOrderID_SalesOrderDetailID na Table Scan dla tabeli z usuniętym kluczem głównym.
+Przy użyciu Or również odpala się tablescan zamiast IndexScanu, który dłużej przetwarza dane.
+ 
